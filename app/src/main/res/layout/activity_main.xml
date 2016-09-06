@@ -1,0 +1,37 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+
+    <Button android:id="@+id/recordwifi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Record"
+        android:onClick="recordwifi"/>
+
+    <Button android:id="@+id/use"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Use"
+        android:onClick="use"
+        android:layout_toRightOf="@id/recordwifi"/>
+
+    <Button android:id="@+id/search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select"
+        android:onClick="search"
+        android:layout_toRightOf="@id/use"/>
+
+
+    <ListView
+        android:layout_below="@id/use"
+        android:id="@+id/lvwifi"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"/>
+
+
+
+</RelativeLayout>
