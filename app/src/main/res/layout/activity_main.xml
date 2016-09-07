@@ -5,25 +5,33 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
 
+    <TextView android:id="@+id/showHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please choose some wifi for indoor location function"/>
+
     <Button android:id="@+id/recordwifi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Record"
-        android:onClick="recordwifi"/>
+        android:onClick="recordwifi"
+        android:layout_below="@id/showHint"/>
 
     <Button android:id="@+id/use"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Use"
         android:onClick="use"
-        android:layout_toRightOf="@id/recordwifi"/>
+        android:layout_toRightOf="@id/recordwifi"
+        android:layout_below="@id/showHint"/>
 
     <Button android:id="@+id/search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Select"
         android:onClick="search"
-        android:layout_toRightOf="@id/use"/>
+        android:layout_toRightOf="@id/use"
+        android:layout_below="@id/showHint"/>
 
 
     <ListView

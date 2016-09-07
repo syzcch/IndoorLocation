@@ -7,12 +7,14 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -42,6 +44,8 @@ public class MainActivity extends ActionBarActivity {
     public  final static String RECORD_KEY = "RECORDWIFI";
 
     private static File dir,file;
+    private Button btRecord;
+    private long exitTime = 0;
 
     private static final String DATABASE_NAME = "wifi.db3";
     private static DBHelper dbhelper;
@@ -61,6 +65,9 @@ public class MainActivity extends ActionBarActivity {
         initWifiData();
         adapter = new MyListAdapter(wifi);
         lv.setAdapter(adapter);
+
+        btRecord = (Button)findViewById(R.id.recordwifi);
+        btRecord.setClickable(false);
     }
 
     //Finding more info about wifi   https://developer.android.com/reference/android/net/wifi/ScanResult.html
@@ -145,6 +152,8 @@ public class MainActivity extends ActionBarActivity {
             Toast.makeText(this, "Please select some Wifi for indoor location", Toast.LENGTH_LONG).show();
             return;
         }
+
+        btRecord.setClickable(true);
 //        wifiSingle.setWifiList(wifi);
     }
 
@@ -239,6 +248,24 @@ public class MainActivity extends ActionBarActivity {
             return view;
         }
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){
+
+            if((System.currentTimeMillis()-exitTime) > 2000){
+                Toast.makeText(getApplicationContext(), "Double click to exit", Toast.LENGTH_SHORT).show();
+                        exitTime = System.currentTimeMillis();
+            }
+            else{
+                finish();
+                System.exit(0);
+            }
+
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     static class ViewHolder{
