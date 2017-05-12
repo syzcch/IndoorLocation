@@ -2,6 +2,8 @@ package com.project.syz.indoorlocation.mainfunc;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.net.wifi.ScanResult;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AlertDialog;
@@ -17,10 +19,14 @@ import android.widget.Toast;
 import com.project.syz.indoorlocation.MainActivity;
 import com.project.syz.indoorlocation.R;
 import com.project.syz.indoorlocation.bean.Wifi;
+import com.project.syz.indoorlocation.bean.WifiItem;
 import com.project.syz.indoorlocation.database.DBHelper;
 
 import java.io.File;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class RecordActivity extends ActionBarActivity {
 
@@ -244,13 +250,53 @@ public class RecordActivity extends ActionBarActivity {
 
         date = new Date(System.currentTimeMillis());
 
+        for(int j = 0; j < 200; j++) {
+            String str = dealwithWifiInfo();
+            dbhelper.InsertLocInfo(xValue, yValue, str);
+        }
         dbhelper.ReplaceInsertLoc(finger, xValue, yValue, date);
+
 
         locX.setText("");
         locY.setText("");
 //        showDetail.setText("");
     }
 
+    private String dealwithWifiInfo()
+    {
+        if(wifi1.get().size() == 0){
+            Toast.makeText(this, "no wifi info to insert into db", Toast.LENGTH_LONG).show();
+            return "";
+        }
+        StringBuilder str = new StringBuilder();
+        WifiManager wifi_service = (WifiManager)getSystemService(WIFI_SERVICE);
+        if(!wifi_service.isWifiEnabled()){
+            Toast.makeText(this, "Please enable your WIFI for indoor location", Toast.LENGTH_LONG).show();
+            finish();
+            System.exit(0);
+        }
+        List<ScanResult> sclist = new ArrayList<ScanResult>();
+        sclist = wifi_service.getScanResults();
+        /*
+        Iterator it = sclist.iterator();
+        while(it.hasNext()){
+            ScanResult tmpsr = (ScanResult)it.next();
+            WifiItem wi = new WifiItem(tmpsr.SSID,tmpsr.level);
+            wifi.add(wi);
+        }
+        */
+        for(int i = 0; i < wifi1.get().size(); i++){
+            Iterator it = sclist.iterator();
+            WifiItem tmp = wifi1.get().get(i);
+            while(it.hasNext()){
+                ScanResult tmpsr = (ScanResult)it.next();
+                if(tmpsr.SSID == tmp.getSSID()){
+                    str.append(tmpsr.SSID).append(":").append(tmpsr.level).append(";");
+                }
+            }
+        }
+        return str.toString();
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

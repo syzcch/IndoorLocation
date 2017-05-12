@@ -152,7 +152,7 @@ public class MainActivity extends ActionBarActivity {
             Toast.makeText(this, "Please select some Wifi for indoor location", Toast.LENGTH_LONG).show();
             return;
         }
-
+        Toast.makeText(this, "Choosing wifi successful", Toast.LENGTH_LONG).show();
         btRecord.setClickable(true);
 //        wifiSingle.setWifiList(wifi);
     }
@@ -160,7 +160,7 @@ public class MainActivity extends ActionBarActivity {
     public void recordwifi(View view){
 
         if(wifiSingle.get().size() == 0){
-            Toast.makeText(this, "Please select some Wifi for indoor location", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Please select some Wifi for indoor location!!", Toast.LENGTH_LONG).show();
             return;
         }
         Intent mIntent = new Intent(this,RecordActivity.class);

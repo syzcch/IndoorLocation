@@ -40,7 +40,12 @@ public class DBHelper {
                     + "locY float,"
                     + "time date"
                     + ");");
-
+            db.execSQL("CREATE TABLE wifiinfo (" +
+                    "_id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    + "locX float,"
+                    + "locY float,"
+                    + "info varchar(500)"
+                    + ");");
             CreateIndex();
 
             Log.d(TAG, "Create Table location ok");
@@ -67,6 +72,16 @@ public class DBHelper {
             Log.d(TAG, "insert into Table location ok");
         } catch (Exception e) {
             Log.d(TAG, "insert into Table location err!");
+        }
+    }
+
+    public void InsertLocInfo(float locx, float locy, String str){
+        //    String sql = "INSERT INTO income values ( " + type + "," + money + "," + meno + "," + date + ")";
+        try {
+            db.execSQL("REPLACE INTO wifiinfo values (null,?,?,?)",new Object[]{locx,locy,str});
+            Log.d(TAG, "insert into Table wifiinfo ok");
+        } catch (Exception e) {
+            Log.d(TAG, "insert into Table wifiinfo err!");
         }
     }
 
