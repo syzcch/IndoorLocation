@@ -79,7 +79,7 @@ public class DBHelper {
         //    String sql = "INSERT INTO income values ( " + type + "," + money + "," + meno + "," + date + ")";
         try {
             db.execSQL("REPLACE INTO wifiinfo values (null,?,?,?)",new Object[]{locx,locy,str});
-            Log.d(TAG, "insert into Table wifiinfo ok");
+//            Log.d(TAG, "insert into Table wifiinfo ok");
         } catch (Exception e) {
             Log.d(TAG, "insert into Table wifiinfo err!");
         }
