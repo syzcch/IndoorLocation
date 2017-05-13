@@ -44,7 +44,7 @@ public class DBHelper {
                     "_id INTEGER PRIMARY KEY AUTOINCREMENT,"
                     + "locX float,"
                     + "locY float,"
-                    + "info varchar(500)"
+                    + "info text"
                     + ");");
             CreateIndex();
 

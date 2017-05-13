@@ -13,7 +13,7 @@
     <Button android:id="@+id/recordwifi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Record"
+        android:text="Recordee"
         android:onClick="recordwifi"
         android:layout_below="@id/showHint"/>
 

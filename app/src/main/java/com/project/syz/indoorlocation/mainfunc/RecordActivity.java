@@ -224,10 +224,8 @@ public class RecordActivity extends ActionBarActivity {
     }
 
     public void submit(View view) {
-
         // if finger computing is too slow, we will move it into a single thread.
         finger = computeFinger();
-
         // just for testing
         if(0 == finger){
             finger = 111111;
@@ -255,8 +253,6 @@ public class RecordActivity extends ActionBarActivity {
             dbhelper.InsertLocInfo(xValue, yValue, str);
         }
         dbhelper.ReplaceInsertLoc(finger, xValue, yValue, date);
-
-
         locX.setText("");
         locY.setText("");
 //        showDetail.setText("");
@@ -290,7 +286,7 @@ public class RecordActivity extends ActionBarActivity {
             WifiItem tmp = wifi1.get().get(i);
             while(it.hasNext()){
                 ScanResult tmpsr = (ScanResult)it.next();
-                if(tmpsr.SSID == tmp.getSSID()){
+                if(tmpsr.SSID.equals(tmp.getSSID())){
                     str.append(tmpsr.SSID).append(":").append(tmpsr.level).append(";");
                 }
             }
